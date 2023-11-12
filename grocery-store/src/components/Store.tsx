@@ -10,6 +10,7 @@ const data = [
   "hot dogs",
   "cumin",
 ];
+
 const apiLink =
   "https://api.unsplash.com/search/photos/?client_id=Z6zar4LxhyFJ5xolagT3z90XoUr0SN_-VDQoQ1NYEtQ&query=";
 
@@ -45,9 +46,22 @@ export const Store = () => {
   }, []);
 
   return (
-    <div>
+    <div className="flex flex-wrap">
       {imageUrls.map((imageUrl, index) => (
-        <img key={index} src={imageUrl} alt={`Image ${index}`} />
+        <div
+          key={index}
+          className="max-w-sm rounded overflow-hidden shadow-lg m-2"
+        >
+          <img
+            className="w-full h-96 object-cover"
+            src={imageUrl}
+            alt={`Image ${index}`}
+          />
+          <div className="px-6 py-4 flex items-center justify-between">
+            <div className="font-bold text-xl">{data[index]}</div>
+            <button className="text-xl bg-gray-300 px-2 rounded-full">+</button>
+          </div>
+        </div>
       ))}
     </div>
   );
