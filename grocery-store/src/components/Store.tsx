@@ -9,6 +9,8 @@ const data = [
   "pizza",
   "hot dogs",
   "cumin",
+  "chicken",
+  "mango",
 ];
 
 const apiLink =
@@ -46,20 +48,22 @@ export const Store = () => {
   }, []);
 
   return (
-    <div className="flex flex-wrap">
+    <div className="flex flex-wrap col-span-2 col-start-2 overflow-y-auto">
       {imageUrls.map((imageUrl, index) => (
         <div
           key={index}
           className="max-w-sm rounded overflow-hidden shadow-lg m-2"
         >
           <img
-            className="w-full h-96 object-cover"
+            className="w-52 h-52 object-cover"
             src={imageUrl}
             alt={`Image ${index}`}
           />
-          <div className="px-6 py-4 flex items-center justify-between">
-            <div className="font-bold text-xl">{data[index]}</div>
-            <button className="text-xl bg-gray-300 px-2 rounded-full">+</button>
+          <div className="px-4 py-4 flex items-center justify-between">
+            <div className="font-bold text-l">{data[index]}</div>
+            <button className="text-xl bg-gray-300 px-2 rounded-full hover:bg-blue-500 ">
+              +
+            </button>
           </div>
         </div>
       ))}
