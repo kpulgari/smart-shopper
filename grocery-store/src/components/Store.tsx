@@ -61,7 +61,7 @@ export const Store = () => {
           />
           <div className="px-4 py-4 flex items-center justify-between">
             <div className="font-bold text-l">{data[index]}</div>
-            <button className="text-xl bg-gray-300 px-2 rounded-full hover:bg-blue-500 ">
+            <button className="text-xl bg-gray-300 px-2 rounded-lg hover:bg-indigo-300 ">
               +
             </button>
           </div>
