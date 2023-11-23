@@ -52,7 +52,7 @@ export const Store = () => {
       {imageUrls.map((imageUrl, index) => (
         <div
           key={index}
-          className="max-w-sm rounded overflow-hidden shadow-lg mx-2 mb-4"
+          className="max-w-sm rounded overflow-hidden shadow-md mx-2 mb-4"
         >
           <img
             className="w-52 h-52 object-cover"
@@ -61,7 +61,7 @@ export const Store = () => {
           />
           <div className="px-4 py-4 flex items-center justify-between">
             <div className="font-bold text-l">{data[index]}</div>
-            <button className="text-xl bg-gray-300 px-2 rounded-lg hover:bg-indigo-300 ">
+            <button className="text-xl bg-cyan-100 px-2 rounded-lg hover:bg-cyan-300 ">
               +
             </button>
           </div>
