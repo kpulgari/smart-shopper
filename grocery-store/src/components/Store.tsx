@@ -48,11 +48,11 @@ export const Store = () => {
   }, []);
 
   return (
-    <div className="flex flex-wrap col-span-2 col-start-2 overflow-y-auto">
+    <div className="flex flex-wrap col-span-2 col-start-2 overflow-y-auto justify-center">
       {imageUrls.map((imageUrl, index) => (
         <div
           key={index}
-          className="max-w-sm rounded overflow-hidden shadow-lg m-2"
+          className="max-w-sm rounded overflow-hidden shadow-lg mx-2 mb-4"
         >
           <img
             className="w-52 h-52 object-cover"
