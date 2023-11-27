@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { unsplashKey } from "../config/config";
 
 const data = [
   "apples",
@@ -13,8 +14,7 @@ const data = [
   "mango",
 ];
 
-const apiLink =
-  "https://api.unsplash.com/search/photos/?client_id=Z6zar4LxhyFJ5xolagT3z90XoUr0SN_-VDQoQ1NYEtQ&query=";
+const apiLink = `https://api.unsplash.com/search/photos/?client_id=${unsplashKey}&query=`;
 
 interface ImageData {
   urls: {
