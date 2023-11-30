@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import { useState, useEffect } from "react";
 import { unsplashKey } from "../config/config";
+
+import axios from "axios";
+// Need to store images somewhere so dont have to rerequest them
 
 const data = [
   "apples",
