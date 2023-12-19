@@ -4,17 +4,7 @@ import { unsplashKey } from "../config/config";
 import axios from "axios";
 // Need to store images somewhere so dont have to rerequest them
 
-const data = [
-  "apples",
-  "bananas",
-  "oranges",
-  "grapes",
-  "pizza",
-  "hot dogs",
-  "cumin",
-  "chicken",
-  "mango",
-];
+const data: string[] = [];
 
 const apiLink = `https://api.unsplash.com/search/photos/?client_id=${unsplashKey}&query=`;
 
@@ -49,15 +39,25 @@ export const Store = () => {
     fetchData();
   }, []);
 
+  if (imageUrls.length === 0) {
+    return (
+      <div className="flex justify-center items-center mr-4">
+        <p className="text-xl font-bold bg-cyan-100 p-4 rounded">
+          No results found! Search for items using search bar above.
+        </p>
+      </div>
+    );
+  }
+
   return (
-    <div className="flex flex-wrap col-span-2 col-start-2 overflow-y-auto justify-center">
+    <div className="flex flex-wrap overflow-y-auto justify-center">
       {imageUrls.map((imageUrl, index) => (
         <div
           key={index}
           className="max-w-sm rounded overflow-hidden shadow-md mx-2 mb-4"
         >
           <img
-            className="w-52 h-52 object-cover"
+            className="lg:w-52 lg:h-52 w-32 h-32 object-cover"
             src={imageUrl}
             alt={`Image ${index}`}
           />

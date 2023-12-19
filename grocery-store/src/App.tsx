@@ -17,10 +17,14 @@ function App() {
   }, []);
 
   return (
-    <div className="grid grid-cols-3 h-screen antialiased overflow-hidden gap-8">
+    <div className="grid grid-cols-3 antialiased overflow-hidden gap-8">
       <Header></Header>
-      <Cart></Cart>
-      <Store></Store>
+      <div className="col-span-1">
+        <Cart></Cart>
+      </div>
+      <div className="col-span-2">
+        <Store></Store>
+      </div>
     </div>
   );
 }
