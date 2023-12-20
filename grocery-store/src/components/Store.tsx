@@ -4,7 +4,7 @@ import { unsplashKey } from "../config/config";
 import axios from "axios";
 // Need to store images somewhere so dont have to rerequest them
 
-const data: string[] = ["apple"];
+const data: string[] = [];
 
 const apiLink = `https://api.unsplash.com/search/photos/?client_id=${unsplashKey}&query=`;
 

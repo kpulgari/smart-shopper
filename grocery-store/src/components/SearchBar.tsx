@@ -49,8 +49,6 @@ export const SearchBar = () => {
     }
   };
 
-  console.log(searchResults);
-
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchText(event.target.value);
   };
@@ -62,6 +60,7 @@ export const SearchBar = () => {
         placeholder="Search"
         value={searchText}
         onChange={handleInputChange}
+        onClick={() => console.log(searchResults)}
       />
       <button
         className="bg-cyan-600 rounded-lg m-4 hover:bg-cyan-800 font-bold font-s px-4 h-full"
