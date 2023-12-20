@@ -17,21 +17,19 @@ export async function SetupInitialData(): Promise<void> {
         if (data) {
           setSearchResults(data);
         }
+
+        if (searchResults.length !== 0) {
+          if (searchResults.length !== itemsInCart) {
+            console.error("Not all items present!", searchResults.length);
+          } else {
+            console.log("All items present!");
+          }
+        }
       } catch (error) {
         console.error("Error setting up initial data:", error);
       }
     };
 
     fetchInitialData();
-  }, []);
-
-  useEffect(() => {
-    if (searchResults.length !== 0) {
-      if (searchResults.length !== itemsInCart) {
-        console.error("Not all items present!", searchResults.length);
-      } else {
-        console.log("All items present!");
-      }
-    }
-  }, [searchResults, itemsInCart]);
+  }, [searchResults.length]);
 }
