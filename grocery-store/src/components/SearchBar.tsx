@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { supabase } from "../services/supabase";
+import { useSearchContext } from "../contexts/SearchContext";
 
 export const SearchBar = () => {
   const [searchText, setSearchText] = useState<string>("");
-  const [searchResults, setSearchResults] = useState<object[]>([]);
   const [typingTimeout, setTypingTimeout] = useState<NodeJS.Timeout | null>(
     null
   );
+  const { setSearchResults } = useSearchContext();
 
   useEffect(() => {
     if (typingTimeout) {
@@ -60,7 +61,6 @@ export const SearchBar = () => {
         placeholder="Search"
         value={searchText}
         onChange={handleInputChange}
-        onClick={() => console.log(searchResults)}
       />
       <button
         className="bg-cyan-600 rounded-lg m-4 hover:bg-cyan-800 font-bold font-s px-4 h-full"

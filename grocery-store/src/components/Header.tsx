@@ -7,7 +7,7 @@ export const Header: React.FC = () => {
   };
 
   return (
-    <div className="sticky col-span-3 h-20 top-0 left-0 flex justify-between items-center bg-cyan-400">
+    <div className="sticky top-0 z-50 h-20 flex justify-between items-center bg-cyan-400">
       <span className="font-bold text-3xl bg-clip-text text-transparent bg-gradient-to-r bg-white mx-4">
         SmartShopper
       </span>

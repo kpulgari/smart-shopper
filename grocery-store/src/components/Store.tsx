@@ -1,10 +1,9 @@
 import { useState, useEffect } from "react";
 import { unsplashKey } from "../config/config";
+import { useSearchContext } from "../contexts/SearchContext";
 
 import axios from "axios";
 // Need to store images somewhere so dont have to rerequest them
-
-const data: string[] = [];
 
 const apiLink = `https://api.unsplash.com/search/photos/?client_id=${unsplashKey}&query=`;
 
@@ -13,16 +12,22 @@ interface ImageData {
     small: string;
   };
 }
+interface SearchResult {
+  name: string;
+  price: string;
+}
 
 export const Store = () => {
   const [imageUrls, setImageUrls] = useState<string[]>([]);
+  const [itemsArray, setItemsArray] = useState<SearchResult[]>([]);
+  const { searchResults } = useSearchContext();
 
   useEffect(() => {
     const fetchData = async () => {
-      const promises = data.map(async (item) => {
+      const promises = searchResults.map(async (item: SearchResult) => {
         try {
           const response = await axios.get<{ results: ImageData[] }>(
-            apiLink + `${item}`
+            apiLink + `${item["name"]}`
           );
           const imageUrl = response.data.results[0]?.urls.small;
           return imageUrl || "";
@@ -36,8 +41,18 @@ export const Store = () => {
       setImageUrls(urls);
     };
 
+    const setData = async () => {
+      const itemsData = searchResults.map((item) => ({
+        name: item.name,
+        price: item.price,
+      }));
+
+      setItemsArray(itemsData);
+    };
+
     fetchData();
-  }, []);
+    setData();
+  }, [searchResults]);
 
   if (imageUrls.length === 0) {
     return (
@@ -62,7 +77,9 @@ export const Store = () => {
             alt={`Image ${index}`}
           />
           <div className="px-4 py-4 flex items-center justify-between">
-            <div className="font-bold text-l">{data[index]}</div>
+            <div className="font-bold text-l">
+              {itemsArray[index]?.name || "Name not available"}
+            </div>
             <button className="text-xl bg-cyan-100 px-2 rounded-lg hover:bg-cyan-300 ">
               +
             </button>

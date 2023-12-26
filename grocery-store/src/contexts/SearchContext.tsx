@@ -4,10 +4,13 @@ import React, { createContext, useState, useContext, ReactNode } from "react";
 interface SearchContextProps {
   children: ReactNode;
 }
-
+interface SearchResult {
+  name: string;
+  price: string;
+}
 interface SearchContextType {
-  searchResults: string[];
-  setSearchResults: React.Dispatch<React.SetStateAction<string[]>>;
+  searchResults: SearchResult[];
+  setSearchResults: React.Dispatch<React.SetStateAction<SearchResult[]>>;
 }
 
 export const SearchContext = createContext<SearchContextType | undefined>(
@@ -15,7 +18,7 @@ export const SearchContext = createContext<SearchContextType | undefined>(
 );
 
 export const SearchProvider: React.FC<SearchContextProps> = ({ children }) => {
-  const [searchResults, setSearchResults] = useState<string[]>([]);
+  const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
 
   const contextValue: SearchContextType = {
     searchResults,
