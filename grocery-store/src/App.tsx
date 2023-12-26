@@ -1,22 +1,29 @@
 import "./App.css";
 import { Store } from "./components/Store";
 import { Header } from "./components/Header";
-import { Cart } from "./components/Cart";
+import { Filter } from "./components/Filter";
 import { SetupInitialData } from "./services/supabaseSetup";
+import { SearchProvider } from "./contexts/SearchContext";
 
 function App() {
   SetupInitialData();
 
   return (
-    <div className="grid grid-cols-3 antialiased overflow-hidden gap-8">
-      <Header></Header>
-      <div className="col-span-1">
-        <Cart></Cart>
+    <SearchProvider>
+      <div className="grid grid-cols-3 antialiased gap-8">
+        <div className="sticky top-0 z-50 col-span-3">
+          <Header></Header>
+        </div>
+        <div className="col-span-1">
+          <div className="fixed w-[32.5%]">
+            <Filter></Filter>
+          </div>
+        </div>
+        <div className="col-span-2">
+          <Store></Store>
+        </div>
       </div>
-      <div className="col-span-2">
-        <Store></Store>
-      </div>
-    </div>
+    </SearchProvider>
   );
 }
 
