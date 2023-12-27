@@ -7,30 +7,64 @@ export const Filter = () => {
   const [orderByPriceAsc, setOrderByPriceAsc] = useState(false);
   const [orderByPriceDesc, setOrderByPriceDesc] = useState(false);
 
-  const handleOrderByAscClick = () => {
-    console.log(orderByAsc, orderByDesc, orderByPriceAsc, orderByPriceDesc);
-    if (!orderByDesc) {
-      setOrderByAsc(!orderByAsc);
-    }
-  };
-
-  const handleOrderByDescClick = () => {
-    if (!orderByAsc) {
-      setOrderByDesc(!orderByDesc);
-    }
-  };
-
-  const handleOrderByPriceAscClick = () => {
-    if (!orderByPriceDesc) {
-      setOrderByPriceAsc(!orderByPriceAsc);
-    }
-  };
-
-  const handleOrderByPriceDescClick = () => {
-    if (!orderByPriceAsc) {
-      setOrderByPriceDesc(!orderByPriceDesc);
-    }
-  };
+  const buttons = [
+    {
+      label: "A-Z",
+      state: orderByAsc,
+      oppositeState: orderByDesc,
+      onClick: () => {
+        if (!orderByDesc || orderByAsc) {
+          setOrderByAsc(!orderByAsc);
+          setOrderByDesc(false);
+        } else {
+          setOrderByDesc(false);
+          setOrderByAsc(true);
+        }
+      },
+    },
+    {
+      label: "Z-A",
+      state: orderByDesc,
+      oppositeState: orderByAsc,
+      onClick: () => {
+        if (!orderByAsc || orderByDesc) {
+          setOrderByDesc(!orderByDesc);
+          setOrderByAsc(false);
+        } else {
+          setOrderByAsc(false);
+          setOrderByDesc(true);
+        }
+      },
+    },
+    {
+      label: "Cheapest",
+      state: orderByPriceAsc,
+      oppositeState: orderByPriceDesc,
+      onClick: () => {
+        if (!orderByPriceDesc || orderByPriceAsc) {
+          setOrderByPriceAsc(!orderByPriceAsc);
+          setOrderByPriceDesc(false);
+        } else {
+          setOrderByPriceDesc(false);
+          setOrderByPriceAsc(true);
+        }
+      },
+    },
+    {
+      label: "Priciest",
+      state: orderByPriceDesc,
+      oppositeState: orderByPriceAsc,
+      onClick: () => {
+        if (!orderByPriceAsc || orderByPriceDesc) {
+          setOrderByPriceDesc(!orderByPriceDesc);
+          setOrderByPriceAsc(false);
+        } else {
+          setOrderByPriceAsc(false);
+          setOrderByPriceDesc(true);
+        }
+      },
+    },
+  ];
 
   return (
     <div className="bg-cyan-100 rounded-lg ml-4 mb-4 overflow-x-hidden">
@@ -39,94 +73,28 @@ export const Filter = () => {
           Filters
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-2 overflow-hidden px-2 justify-center ">
-          <div
-            className={`h-16 w-full flex justify-center items-center rounded-lg p-4 font-bold m-0 transition duration-200 ease-in-out ${
-              orderByAsc ? "bg-cyan-500 text-white cursor-pointer" : ""
-            } ${
-              orderByDesc ? "bg-slate-200 text-slate-400 cursor-default " : ""
-            } ${
-              !orderByAsc && !orderByDesc
-                ? "bg-white hover:bg-cyan-300 cursor-pointer"
-                : ""
-            }`}
-            onClick={handleOrderByAscClick}
-          >
-            <label
-              htmlFor="orderByPriceDesc"
-              className={`m-2 ${
-                orderByDesc ? "cursor-default " : "cursor-pointer"
+          {buttons.map((button, index) => (
+            <div
+              key={index}
+              className={`h-16 w-full flex justify-center items-center cursor-pointer rounded-lg p-4 font-bold m-0 transition duration-200 ease-in-out ${
+                button.state ? "bg-cyan-500 text-white " : ""
+              } ${
+                button.oppositeState ? "bg-slate-200 text-slate-400  " : ""
+              } ${
+                !button.state && !button.oppositeState
+                  ? "bg-white hover:bg-cyan-300 "
+                  : ""
               }`}
+              onClick={button.onClick}
             >
-              A-Z
-            </label>
-          </div>
-          <div
-            className={`h-16 w-full flex justify-center items-center rounded-lg p-4 font-bold m-0 transition duration-200 ease-in-out ${
-              orderByDesc ? "bg-cyan-500 text-white cursor-pointer" : ""
-            } ${
-              orderByAsc ? "bg-slate-200 text-slate-400 cursor-default " : ""
-            } ${
-              !orderByAsc && !orderByDesc
-                ? "bg-white hover:bg-cyan-300 cursor-pointer"
-                : ""
-            }`}
-            onClick={handleOrderByDescClick}
-          >
-            <label
-              htmlFor="orderByPriceDesc"
-              className={`m-2 ${
-                orderByAsc ? "cursor-default " : "cursor-pointer"
-              }`}
-            >
-              Z-A
-            </label>
-          </div>
-          <div
-            className={`h-16 w-full flex justify-center items-center rounded-lg p-4 font-bold m-0 transition duration-200 ease-in-out ${
-              orderByPriceAsc ? "bg-cyan-500 text-white cursor-pointer" : ""
-            } ${
-              orderByPriceDesc
-                ? "bg-slate-200 text-slate-400 cursor-default "
-                : ""
-            } ${
-              !orderByPriceAsc && !orderByPriceDesc
-                ? "bg-white hover:bg-cyan-300 cursor-pointer"
-                : ""
-            }`}
-            onClick={handleOrderByPriceAscClick}
-          >
-            <label
-              htmlFor="orderByPriceDesc"
-              className={`m-2 ${
-                orderByPriceDesc ? "cursor-default " : "cursor-pointer"
-              }`}
-            >
-              Cheapest
-            </label>
-          </div>
-          <div
-            className={`h-16 w-full flex justify-center items-center rounded-lg p-4 font-bold m-0 transition duration-200 ease-in-out ${
-              orderByPriceDesc ? "bg-cyan-500 text-white cursor-pointer" : ""
-            } ${
-              orderByPriceAsc
-                ? "bg-slate-200 text-slate-400 cursor-default "
-                : ""
-            } ${
-              !orderByPriceDesc && !orderByPriceAsc
-                ? "bg-white hover:bg-cyan-300 cursor-pointer"
-                : ""
-            }`}
-            onClick={handleOrderByPriceDescClick}
-          >
-            <label
-              htmlFor="orderByPriceDesc"
-              className={`m-2 ${
-                orderByPriceAsc ? "cursor-default " : "cursor-pointer"
-              }`}
-            >
-              Priciest
-            </label>
-          </div>
+              <label
+                htmlFor={`orderByPriceDesc-${index}`}
+                className="m-2 cursor-pointer"
+              >
+                {button.label}
+              </label>
+            </div>
+          ))}
         </div>
       </div>
     </div>
