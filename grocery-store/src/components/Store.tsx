@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { unsplashKey } from "../config/config";
 import { useSearchContext } from "../contexts/SearchContext";
+import "../styles/Store.css";
 
 import axios from "axios";
 // Need to store images somewhere so dont have to rerequest them
@@ -56,8 +57,8 @@ export const Store = () => {
 
   if (imageUrls.length === 0) {
     return (
-      <div className="flex justify-center items-center mr-4">
-        <p className="text-xl font-bold bg-cyan-100 p-4 rounded">
+      <div className="flex justify-center items-center mr-4 text-center ">
+        <p className="text-xl font-bold bg-black text-white p-6 rounded-2xl">
           No results found! Search for items using search bar above.
         </p>
       </div>
@@ -66,26 +67,32 @@ export const Store = () => {
 
   return (
     <div className="flex flex-wrap overflow-y-auto justify-center">
-      {imageUrls.map((imageUrl, index) => (
-        <div
-          key={index}
-          className="max-w-sm rounded overflow-hidden shadow-md mx-2 mb-4"
-        >
-          <img
-            className="lg:w-52 lg:h-52 w-32 h-32 object-cover"
-            src={imageUrl}
-            alt={`Image ${index}`}
-          />
-          <div className="px-4 py-4 flex items-center justify-between">
-            <div className="font-bold text-l">
-              {itemsArray[index]?.name || "Name not available"}
+      {imageUrls.map((imageUrl, index) => {
+        const productName = itemsArray[index]?.name;
+        const truncatedName =
+          productName && productName.length > 11
+            ? productName.substring(0, 8).trim() + "..."
+            : productName;
+
+        return (
+          <div
+            key={index}
+            className="max-w-sm rounded-xl overflow-hidden shadow-xl mx-2 mb-4"
+          >
+            <img
+              className="lg:w-52 lg:h-52 w-32 h-32 object-cover"
+              src={imageUrl}
+              alt={`Image ${index}`}
+            />
+            <div className="px-4 py-4 flex items-center text-xs justify-between text-white bg-black lg:text-lg custom-cursor">
+              <div className="font-bold" title={productName}>
+                {truncatedName}
+              </div>
+              <div className="font-light">{itemsArray[index]?.price}</div>
             </div>
-            <button className="text-xl bg-cyan-100 px-2 rounded-lg hover:bg-cyan-300 ">
-              +
-            </button>
           </div>
-        </div>
-      ))}
+        );
+      })}
     </div>
   );
 };
