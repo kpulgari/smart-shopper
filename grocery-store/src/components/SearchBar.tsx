@@ -63,7 +63,7 @@ export const SearchBar = () => {
         onChange={handleInputChange}
       />
       <button
-        className="bg-cyan-600 rounded-lg m-4 hover:bg-cyan-800 font-bold font-s px-4 h-full"
+        className="bg-white rounded-3xl m-4 hover:bg-gray-500 font-bold font-s px-4 h-full transition duration-100 ease-in-out"
         onClick={() => setSearchResults([])}
       >
         🤖

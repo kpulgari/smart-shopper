@@ -58,7 +58,7 @@ export const Store = () => {
   if (imageUrls.length === 0) {
     return (
       <div className="flex justify-center items-center mr-4 text-center ">
-        <p className="text-xl font-bold bg-black text-white p-6 rounded-2xl">
+        <p className="text-xl font-bold bg-black text-white p-6 rounded-2xl shadow-2xl shadow-black">
           No results found! Search for items using search bar above.
         </p>
       </div>
@@ -77,14 +77,14 @@ export const Store = () => {
         return (
           <div
             key={index}
-            className="max-w-sm rounded-xl overflow-hidden shadow-xl mx-2 mb-4"
+            className="max-w-sm rounded-xl overflow-hidden bg-black shadow-md shadow-black mx-2 mb-4"
           >
             <img
-              className="lg:w-52 lg:h-52 w-32 h-32 object-cover"
+              className="lg:w-52 lg:h-52 w-36 h-36 object-cover"
               src={imageUrl}
               alt={`Image ${index}`}
             />
-            <div className="px-4 py-4 flex items-center text-xs justify-between text-white bg-black lg:text-lg custom-cursor">
+            <div className="p-4 flex items-center text-xs justify-between text-white lg:text-lg">
               <div className="font-bold" title={productName}>
                 {truncatedName}
               </div>
