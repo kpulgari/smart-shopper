@@ -13,7 +13,7 @@ export const Header: React.FC = () => {
       </span>
       <SearchBar></SearchBar>
       <button
-        className="bg-white rounded-xl px-2 mx-4 h-8 text-black font-bold transition duration-100 ease-in-out"
+        className="bg-white rounded-xl px-2 mx-4 h-8 text-black font-bold"
         onClick={handleCheckout}
       >
         Checkout

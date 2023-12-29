@@ -2,12 +2,37 @@ import React, { useState, useEffect } from "react";
 import { supabase } from "../services/supabase";
 import { useSearchContext } from "../contexts/SearchContext";
 
+interface SearchResult {
+  name: string;
+  price: string;
+}
+
 export const SearchBar = () => {
   const [searchText, setSearchText] = useState<string>("");
   const [typingTimeout, setTypingTimeout] = useState<NodeJS.Timeout | null>(
     null
   );
+  const [initialSearchResult, setInitialSearchResult] = useState<
+    SearchResult[]
+  >([]);
   const { setSearchResults } = useSearchContext();
+
+  const initialSearch = async () => {
+    try {
+      const { data, error } = await supabase.from("Product").select("*");
+
+      if (error) {
+        throw error;
+      }
+
+      if (data) {
+        setInitialSearchResult(data);
+        setSearchResults(data);
+      }
+    } catch (error) {
+      console.error("Error searching!");
+    }
+  };
 
   useEffect(() => {
     if (typingTimeout) {
@@ -17,8 +42,10 @@ export const SearchBar = () => {
     const timeout = setTimeout(() => {
       if (searchText !== "") {
         performSearch();
+      } else if (initialSearchResult.length === 0) {
+        initialSearch();
       } else {
-        setSearchResults([]);
+        setSearchResults(initialSearchResult);
       }
     }, 1000);
 
@@ -53,6 +80,7 @@ export const SearchBar = () => {
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchText(event.target.value);
   };
+
   return (
     <div className="h-8 flex items-center col-start-2 col-span-2 rounded-lg justify-center w-1/2">
       <input
@@ -63,7 +91,7 @@ export const SearchBar = () => {
         onChange={handleInputChange}
       />
       <button
-        className="rounded-3xl font-bold font-s px-4 h-full transition duration-100 ease-in-out bg-gradient-to-r from-cyan-500 to-indigo-500"
+        className="rounded-3xl font-bold font-s px-4 h-full bg-gradient-to-r from-cyan-500 to-indigo-500"
         onClick={() => setSearchResults([])}
       >
         <svg
