@@ -8,12 +8,12 @@ export const Header: React.FC = () => {
 
   return (
     <div className="sticky top-0 z-50 h-20 flex justify-between items-center bg-black ">
-      <span className="font-bold text-3xl bg-clip-text text-transparent bg-white mx-4">
+      <span className="font-bold text-3xl mx-4 bg-clip-text text-transparent bg-white">
         SmartShopper
       </span>
       <SearchBar></SearchBar>
       <button
-        className="bg-white rounded-lg px-2 mx-4 h-8 text-black font-bold transition duration-100 ease-in-out"
+        className="bg-white rounded-xl px-2 mx-4 h-8 text-black font-bold transition duration-100 ease-in-out"
         onClick={handleCheckout}
       >
         Checkout
