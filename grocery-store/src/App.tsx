@@ -10,17 +10,19 @@ function App() {
 
   return (
     <SearchProvider>
-      <div className="grid grid-cols-3 antialiased gap-8 bg-gradient-to-r from-cyan-300 to-indigo-300">
-        <div className="sticky top-0 z-50 col-span-3">
-          <Header></Header>
-        </div>
-        <div className="col-span-1">
-          <div className="fixed w-[32.5%]">
-            <Filter></Filter>
+      <div className="min-h-screen bg-gradient-to-r from-cyan-300 to-indigo-300">
+        <div className="grid grid-cols-3 antialiased gap-8 ">
+          <div className="sticky top-0 z-50 col-span-3">
+            <Header></Header>
           </div>
-        </div>
-        <div className="col-span-2">
-          <Store></Store>
+          <div className="col-span-1">
+            <div className="fixed w-[32.5%]">
+              <Filter></Filter>
+            </div>
+          </div>
+          <div className="col-span-2">
+            <Store></Store>
+          </div>
         </div>
       </div>
     </SearchProvider>

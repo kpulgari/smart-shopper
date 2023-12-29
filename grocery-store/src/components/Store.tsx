@@ -57,7 +57,7 @@ export const Store = () => {
 
   if (imageUrls.length === 0) {
     return (
-      <div className="flex justify-center items-center mr-4 text-center ">
+      <div className="flex justify-center items-center mr-4 text-center">
         <p className="text-xl font-bold bg-black text-white p-6 rounded-2xl shadow-2xl shadow-black">
           No results found! Search for items using search bar above.
         </p>
