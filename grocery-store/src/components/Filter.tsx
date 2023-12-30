@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../styles/Filter.css";
 import { useSearchContext } from "../contexts/SearchContext";
 
@@ -13,7 +13,19 @@ export const Filter = () => {
     applyResetFilter,
     sortByNameAndPrice,
     sortByPriceAndName,
+    checkIsSearching,
   } = useSearchContext();
+
+  const isSearching = checkIsSearching();
+
+  useEffect(() => {
+    if (isSearching) {
+      setOrderByAsc(false);
+      setOrderByDesc(false);
+      setOrderByPriceAsc(false);
+      setOrderByPriceDesc(false);
+    }
+  }, [isSearching]);
 
   const buttons = [
     {
