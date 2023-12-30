@@ -15,6 +15,8 @@ interface SearchContextType {
   sortByPrice: (asc: boolean) => void;
   resetFilter: (results: SearchResult[]) => void;
   applyResetFilter: () => void;
+  sortByNameAndPrice: (priceAsc: boolean, nameAsc: boolean) => void;
+  sortByPriceAndName: (priceAsc: boolean, nameAsc: boolean) => void;
 }
 
 export const SearchContext = createContext<SearchContextType | undefined>(
@@ -36,6 +38,33 @@ export const SearchProvider: React.FC<SearchContextProps> = ({ children }) => {
       } else {
         return b.name.localeCompare(a.name);
       }
+    });
+    setSearchResults(sortedResults);
+  };
+
+  const sortByPriceAndName = (priceAsc: boolean, nameAsc: boolean) => {
+    const sortedResults = [...searchResults].sort((a, b) => {
+      const priceComparison = parseFloat(a.price) - parseFloat(b.price);
+      if (priceComparison === 0) {
+        if (nameAsc) {
+          return a.name.localeCompare(b.name);
+        } else {
+          return b.name.localeCompare(a.name);
+        }
+      }
+      return priceAsc ? priceComparison : -priceComparison;
+    });
+    setSearchResults(sortedResults);
+  };
+
+  const sortByNameAndPrice = (priceAsc: boolean, nameAsc: boolean) => {
+    const sortedResults = [...searchResults].sort((a, b) => {
+      const nameComparison = a.name.localeCompare(b.name);
+      if (nameComparison === 0) {
+        const priceComparison = parseFloat(a.price) - parseFloat(b.price);
+        return nameAsc ? priceComparison : -priceComparison;
+      }
+      return nameAsc ? nameComparison : -nameComparison;
     });
     setSearchResults(sortedResults);
   };
@@ -66,6 +95,8 @@ export const SearchProvider: React.FC<SearchContextProps> = ({ children }) => {
     sortByPrice,
     resetFilter,
     applyResetFilter,
+    sortByPriceAndName,
+    sortByNameAndPrice,
   };
 
   return (
