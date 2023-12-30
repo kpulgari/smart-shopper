@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import "../styles/Filter.css";
+import { useSearchContext } from "../contexts/SearchContext";
 
 export const Filter = () => {
   const [orderByAsc, setOrderByAsc] = useState(false);
   const [orderByDesc, setOrderByDesc] = useState(false);
   const [orderByPriceAsc, setOrderByPriceAsc] = useState(false);
   const [orderByPriceDesc, setOrderByPriceDesc] = useState(false);
+  const { sortByName, sortByPrice, applyResetFilter } = useSearchContext();
 
   const buttons = [
     {
@@ -13,12 +15,16 @@ export const Filter = () => {
       state: orderByAsc,
       oppositeState: orderByDesc,
       onClick: () => {
-        if (!orderByDesc || orderByAsc) {
-          setOrderByAsc(!orderByAsc);
-          setOrderByDesc(false);
-        } else {
-          setOrderByDesc(false);
+        if (!orderByDesc && !orderByAsc) {
           setOrderByAsc(true);
+          sortByName(true);
+        } else if (orderByAsc) {
+          setOrderByAsc(false);
+          applyResetFilter();
+        } else if (orderByDesc) {
+          setOrderByAsc(true);
+          setOrderByDesc(false);
+          sortByName(true);
         }
       },
     },
@@ -27,12 +33,16 @@ export const Filter = () => {
       state: orderByDesc,
       oppositeState: orderByAsc,
       onClick: () => {
-        if (!orderByAsc || orderByDesc) {
-          setOrderByDesc(!orderByDesc);
-          setOrderByAsc(false);
-        } else {
-          setOrderByAsc(false);
+        if (!orderByAsc && !orderByDesc) {
           setOrderByDesc(true);
+          sortByName(false);
+        } else if (orderByDesc) {
+          setOrderByDesc(false);
+          applyResetFilter();
+        } else if (orderByAsc) {
+          setOrderByDesc(true);
+          setOrderByAsc(false);
+          sortByName(false);
         }
       },
     },
@@ -41,12 +51,16 @@ export const Filter = () => {
       state: orderByPriceAsc,
       oppositeState: orderByPriceDesc,
       onClick: () => {
-        if (!orderByPriceDesc || orderByPriceAsc) {
-          setOrderByPriceAsc(!orderByPriceAsc);
-          setOrderByPriceDesc(false);
-        } else {
-          setOrderByPriceDesc(false);
+        if (!orderByPriceAsc && !orderByPriceDesc) {
           setOrderByPriceAsc(true);
+          sortByPrice(true);
+        } else if (orderByPriceAsc) {
+          setOrderByPriceAsc(false);
+          applyResetFilter();
+        } else if (orderByPriceDesc) {
+          setOrderByPriceAsc(true);
+          setOrderByPriceDesc(false);
+          sortByPrice(true);
         }
       },
     },
@@ -55,12 +69,16 @@ export const Filter = () => {
       state: orderByPriceDesc,
       oppositeState: orderByPriceAsc,
       onClick: () => {
-        if (!orderByPriceAsc || orderByPriceDesc) {
-          setOrderByPriceDesc(!orderByPriceDesc);
-          setOrderByPriceAsc(false);
-        } else {
+        if (!orderByPriceAsc && !orderByPriceDesc) {
+          setOrderByPriceDesc(true);
+          sortByPrice(false);
+        } else if (orderByPriceDesc) {
+          setOrderByPriceDesc(false);
+          applyResetFilter();
+        } else if (orderByPriceAsc) {
           setOrderByPriceAsc(false);
           setOrderByPriceDesc(true);
+          sortByPrice(false);
         }
       },
     },

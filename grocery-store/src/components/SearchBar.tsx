@@ -15,7 +15,7 @@ export const SearchBar = () => {
   const [initialSearchResult, setInitialSearchResult] = useState<
     SearchResult[]
   >([]);
-  const { setSearchResults } = useSearchContext();
+  const { setSearchResults, resetFilter } = useSearchContext();
 
   const initialSearch = async () => {
     try {
@@ -44,8 +44,10 @@ export const SearchBar = () => {
         performSearch();
       } else if (initialSearchResult.length === 0) {
         initialSearch();
+        resetFilter(initialSearchResult);
       } else {
         setSearchResults(initialSearchResult);
+        resetFilter(initialSearchResult);
       }
     }, 1000);
 
@@ -71,6 +73,7 @@ export const SearchBar = () => {
 
       if (data) {
         setSearchResults(data);
+        resetFilter(data);
       }
     } catch (error) {
       console.error("Error searching!");
