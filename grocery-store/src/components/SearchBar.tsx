@@ -15,7 +15,8 @@ export const SearchBar = () => {
   const [initialSearchResult, setInitialSearchResult] = useState<
     SearchResult[]
   >([]);
-  const { setSearchResults, resetFilter } = useSearchContext();
+  const { setSearchResults, resetFilter, setIsSearchingFunction } =
+    useSearchContext();
 
   const initialSearch = async () => {
     try {
@@ -40,15 +41,19 @@ export const SearchBar = () => {
       clearTimeout(typingTimeout);
     }
 
+    setIsSearchingFunction(true);
+
+    if (searchText !== "") {
+      performSearch();
+    } else if (initialSearchResult.length === 0) {
+      initialSearch();
+    } else {
+      setSearchResults(initialSearchResult);
+      resetFilter(initialSearchResult);
+    }
+
     const timeout = setTimeout(() => {
-      if (searchText !== "") {
-        performSearch();
-      } else if (initialSearchResult.length === 0) {
-        initialSearch();
-      } else {
-        setSearchResults(initialSearchResult);
-        resetFilter(initialSearchResult);
-      }
+      setIsSearchingFunction(false);
     }, 1000);
 
     setTypingTimeout(timeout);
