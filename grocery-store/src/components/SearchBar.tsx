@@ -28,6 +28,7 @@ export const SearchBar = () => {
       if (data) {
         setInitialSearchResult(data);
         setSearchResults(data);
+        resetFilter(data);
       }
     } catch (error) {
       console.error("Error searching!");
@@ -44,7 +45,6 @@ export const SearchBar = () => {
         performSearch();
       } else if (initialSearchResult.length === 0) {
         initialSearch();
-        resetFilter(initialSearchResult);
       } else {
         setSearchResults(initialSearchResult);
         resetFilter(initialSearchResult);
