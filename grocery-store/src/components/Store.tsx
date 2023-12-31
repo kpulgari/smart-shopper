@@ -1,18 +1,7 @@
 import { useState, useEffect } from "react";
-// import { unsplashKey } from "../config/config";
 import { useSearchContext } from "../contexts/SearchContext";
-// import { supabase } from "../services/supabase";
 import "../styles/Store.css";
 
-// import axios from "axios";
-
-// const apiLink = `https://api.unsplash.com/search/photos/?client_id=${unsplashKey}&query=`;
-
-// interface ImageData {
-//   urls: {
-//     small: string;
-//   };
-// }
 interface SearchResult {
   name: string;
   price: string;
@@ -30,24 +19,6 @@ export const Store = () => {
   }, [checkImagesLoading]);
 
   useEffect(() => {
-    // const fetchData = async () => {
-    //   const promises = searchResults.map(async (item: SearchResult) => {
-    //     try {
-    //       const response = await axios.get<{ results: ImageData[] }>(
-    //         apiLink + `${item["name"]}`
-    //       );
-    //       const imageUrl = response.data.results[0]?.urls.small;
-    //       return imageUrl || "";
-    //     } catch (error) {
-    //       console.error("Error fetching image:", error);
-    //       return "";
-    //     }
-    //   });
-
-    //   const urls = await Promise.all(promises);
-    //   setImageUrls(urls);
-    // };
-
     const getImages = async () => {
       const data = getImageData();
 
