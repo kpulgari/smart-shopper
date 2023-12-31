@@ -19,6 +19,9 @@ interface SearchContextType {
   sortByPriceAndName: (priceAsc: boolean, nameAsc: boolean) => void;
   setIsSearchingFunction: (searching: boolean) => void;
   checkIsSearching: () => boolean;
+  setImageDataFunction: (images: Record<string, string>) => void;
+  getImageData: () => Record<string, string>;
+  checkImagesLoading: () => boolean;
 }
 
 export const SearchContext = createContext<SearchContextType | undefined>(
@@ -29,6 +32,19 @@ export const SearchProvider: React.FC<SearchContextProps> = ({ children }) => {
   const [originalResults, setOriginalResults] = useState<SearchResult[]>([]);
   const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
   const [isSearching, setIsSearching] = useState(false);
+  const [imageData, setImageData] = useState<Record<string, string>>({});
+
+  const setImageDataFunction = (images: Record<string, string>) => {
+    setImageData(images);
+  };
+
+  const checkImagesLoading = () => {
+    return Object.keys(imageData).length === 0;
+  };
+
+  const getImageData = () => {
+    return imageData;
+  };
 
   const setOriginalSearchResults = (results: SearchResult[]) => {
     setOriginalResults(results);
@@ -90,7 +106,6 @@ export const SearchProvider: React.FC<SearchContextProps> = ({ children }) => {
   };
 
   const resetFilter = (results: SearchResult[]) => {
-    console.log(results);
     setOriginalSearchResults(results);
   };
 
@@ -110,6 +125,9 @@ export const SearchProvider: React.FC<SearchContextProps> = ({ children }) => {
     sortByNameAndPrice,
     setIsSearchingFunction,
     checkIsSearching,
+    setImageDataFunction,
+    getImageData,
+    checkImagesLoading,
   };
 
   return (

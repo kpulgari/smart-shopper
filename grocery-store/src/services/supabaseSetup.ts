@@ -3,7 +3,7 @@ import { supabase } from "./supabase";
 
 export async function SetupInitialData(): Promise<void> {
   const [searchResults, setSearchResults] = useState<object[]>([]);
-  const itemsInCart = 143;
+  const itemsInCart = 142;
 
   useEffect(() => {
     const fetchInitialData = async () => {

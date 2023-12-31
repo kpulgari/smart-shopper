@@ -15,8 +15,12 @@ export const SearchBar = () => {
   const [initialSearchResult, setInitialSearchResult] = useState<
     SearchResult[]
   >([]);
-  const { setSearchResults, resetFilter, setIsSearchingFunction } =
-    useSearchContext();
+  const {
+    setSearchResults,
+    resetFilter,
+    setIsSearchingFunction,
+    setImageDataFunction,
+  } = useSearchContext();
 
   const initialSearch = async () => {
     try {
@@ -36,18 +40,47 @@ export const SearchBar = () => {
     }
   };
 
+  const fetchImagesFromStorage = async () => {
+    const images: Record<string, string> = {};
+    const promises = initialSearchResult.map(async (item: SearchResult) => {
+      try {
+        const { data } = await supabase.storage
+          .from("products")
+          .download(`${item.name}.jpg`);
+
+        if (data instanceof Blob) {
+          const imageUrl = URL.createObjectURL(data);
+          images[item.name] = imageUrl;
+        }
+      } catch (error) {
+        console.error("Error fetching image:", error);
+      }
+    });
+
+    await Promise.all(promises);
+    setImageDataFunction(images);
+  };
+
+  useEffect(() => {
+    initialSearch();
+  }, []);
+
+  useEffect(() => {
+    fetchImagesFromStorage();
+  }, [initialSearchResult.length]);
+
   useEffect(() => {
     if (typingTimeout) {
       clearTimeout(typingTimeout);
     }
 
-    setIsSearchingFunction(true);
-
     if (searchText !== "") {
+      setIsSearchingFunction(true);
       performSearch();
     } else if (initialSearchResult.length === 0) {
       initialSearch();
     } else {
+      setIsSearchingFunction(true);
       setSearchResults(initialSearchResult);
       resetFilter(initialSearchResult);
     }
