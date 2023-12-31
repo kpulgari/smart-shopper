@@ -11,15 +11,20 @@ export const Store = () => {
   const [imageUrls, setImageUrls] = useState<string[]>([]);
   const [itemsArray, setItemsArray] = useState<SearchResult[]>([]);
   const [imagesLoading, setImagesLoading] = useState(false);
+  const [isSearching, setIsSearching] = useState(false);
   const { searchResults, checkIsSearching, getImageData, checkImagesLoading } =
     useSearchContext();
+
+  useEffect(() => {
+    setIsSearching(checkIsSearching());
+  }, [checkIsSearching]);
 
   useEffect(() => {
     setImagesLoading(checkImagesLoading());
   }, [checkImagesLoading]);
 
   useEffect(() => {
-    const getImages = async () => {
+    const setImageData = async () => {
       const data = getImageData();
 
       const promises = searchResults.map(async (item: SearchResult) => {
@@ -35,7 +40,7 @@ export const Store = () => {
       setImageUrls(urls);
     };
 
-    const setData = async () => {
+    const setItemData = async () => {
       const itemsData = searchResults.map((item) => ({
         name: item.name,
         price: item.price,
@@ -44,11 +49,11 @@ export const Store = () => {
       setItemsArray(itemsData);
     };
 
-    getImages();
-    setData();
+    setImageData();
+    setItemData();
   }, [searchResults, imagesLoading]);
 
-  if (imageUrls.length === 0 && !checkIsSearching() && !imagesLoading) {
+  if (imageUrls.length === 0 && !isSearching && !imagesLoading) {
     return (
       <div className="flex justify-center items-center mr-4 text-center">
         <p className="text-xl font-bold bg-black text-white p-6 rounded-2xl shadow-2xl shadow-black">
@@ -88,7 +93,7 @@ export const Store = () => {
     );
   }
 
-  if (checkIsSearching()) {
+  if (isSearching) {
     return (
       <div className="flex justify-center items-center mr-4 text-center">
         <p className="text-xl font-bold bg-black text-white p-6 rounded-2xl shadow-2xl shadow-black flex flex-row items-center">
