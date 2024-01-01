@@ -160,7 +160,7 @@ export const Filter = () => {
 
   return (
     <div className="bg-black rounded-2xl shadow-2xl shadow-black ml-8 mb-4 overflow-x-hidden">
-      <div className="flex flex-col gap-4 m-4">
+      <div className="flex flex-col gap-4 m-4 ">
         <div className="text-white flex justify-center items-center w-full h-fit font-bold lg:text-xl text-base ">
           Filters
         </div>

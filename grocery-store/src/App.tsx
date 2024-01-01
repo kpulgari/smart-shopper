@@ -13,7 +13,7 @@ function App() {
     <SearchProvider>
       <div className="min-h-screen bg-gradient-to-r from-cyan-200 to-indigo-300">
         <div className="grid grid-cols-3 antialiased lg:gap-8 gap-4">
-          <div className="sticky top-0 z-50 col-span-3">
+          <div className="sticky top-0 z-50 col-span-3 ">
             <Header></Header>
           </div>
           <div className="col-span-1">
