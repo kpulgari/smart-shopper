@@ -3,9 +3,17 @@ import React, { createContext, useState, useContext, ReactNode } from "react";
 interface SearchContextProps {
   children: ReactNode;
 }
+
 interface SearchResult {
   name: string;
   price: string;
+}
+
+interface CartItem {
+  name: string;
+  quantity: number;
+  totalPrice: number;
+  image: string;
 }
 interface SearchContextType {
   originalResults: SearchResult[];
@@ -22,6 +30,8 @@ interface SearchContextType {
   setImageDataFunction: (images: Record<string, string>) => void;
   getImageData: () => Record<string, string>;
   checkImagesLoading: () => boolean;
+  setCartDataFunction: (item: CartItem) => void;
+  getCartData: () => CartItem[];
 }
 
 export const SearchContext = createContext<SearchContextType | undefined>(
@@ -33,6 +43,38 @@ export const SearchProvider: React.FC<SearchContextProps> = ({ children }) => {
   const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
   const [isSearching, setIsSearching] = useState(false);
   const [imageData, setImageData] = useState<Record<string, string>>({});
+  const [cartData, setCartData] = useState<CartItem[]>([]);
+
+  const setCartDataFunction = (item: CartItem) => {
+    const existingItemIndex = cartData.findIndex(
+      (element) => element.name === item.name
+    );
+
+    if (existingItemIndex !== -1) {
+      const updatedCartData = [...cartData];
+      updatedCartData[existingItemIndex].quantity += 1;
+      updatedCartData[existingItemIndex].totalPrice = parseFloat(
+        (
+          updatedCartData[existingItemIndex].totalPrice + item.totalPrice
+        ).toFixed(2)
+      );
+
+      setCartData(updatedCartData);
+    } else {
+      setCartData([
+        ...cartData,
+        {
+          ...item,
+          quantity: 1,
+          totalPrice: parseFloat(item.totalPrice.toFixed(2)),
+        },
+      ]);
+    }
+  };
+
+  const getCartData = () => {
+    return cartData;
+  };
 
   const setImageDataFunction = (images: Record<string, string>) => {
     setImageData(images);
@@ -128,6 +170,8 @@ export const SearchProvider: React.FC<SearchContextProps> = ({ children }) => {
     setImageDataFunction,
     getImageData,
     checkImagesLoading,
+    setCartDataFunction,
+    getCartData,
   };
 
   return (

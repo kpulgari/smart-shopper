@@ -7,13 +7,25 @@ interface SearchResult {
   price: string;
 }
 
+interface CartItem {
+  name: string;
+  quantity: number;
+  totalPrice: number;
+  image: string;
+}
+
 export const Store = () => {
   const [imageUrls, setImageUrls] = useState<string[]>([]);
   const [itemsArray, setItemsArray] = useState<SearchResult[]>([]);
   const [imagesLoading, setImagesLoading] = useState(false);
   const [isSearching, setIsSearching] = useState(false);
-  const { searchResults, checkIsSearching, getImageData, checkImagesLoading } =
-    useSearchContext();
+  const {
+    searchResults,
+    checkIsSearching,
+    getImageData,
+    checkImagesLoading,
+    setCartDataFunction,
+  } = useSearchContext();
 
   useEffect(() => {
     setIsSearching(checkIsSearching());
@@ -53,9 +65,13 @@ export const Store = () => {
     setItemData();
   }, [searchResults, imagesLoading]);
 
+  const addItem = (item: CartItem) => {
+    setCartDataFunction(item);
+  };
+
   if (imageUrls.length === 0 && !isSearching && !imagesLoading) {
     return (
-      <div className="flex justify-center items-center mr-4 text-center">
+      <div className="flex justify-center items-center mr-4 text-center h-[80vh]">
         <p className="text-xl font-bold bg-black text-white p-6 rounded-2xl shadow-2xl shadow-black">
           No results found! Search for items using search bar above.
         </p>
@@ -65,7 +81,7 @@ export const Store = () => {
 
   if (imagesLoading) {
     return (
-      <div className="flex justify-center items-center mr-4 text-center">
+      <div className="flex justify-center items-center mr-4 text-center h-[80vh]">
         <p className="text-xl font-bold bg-black text-white p-6 rounded-2xl shadow-2xl shadow-black flex flex-row items-center">
           <svg
             className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
@@ -95,7 +111,7 @@ export const Store = () => {
 
   if (isSearching) {
     return (
-      <div className="flex justify-center items-center mr-4 text-center">
+      <div className="flex justify-center items-center mr-4 text-center h-[80vh]">
         <p className="text-xl font-bold bg-black text-white p-6 rounded-2xl shadow-2xl shadow-black flex flex-row items-center">
           <svg
             className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
@@ -135,6 +151,14 @@ export const Store = () => {
         return (
           <div
             key={index}
+            onClick={() =>
+              addItem({
+                name: truncatedName,
+                totalPrice: parseFloat(itemsArray[index]?.price),
+                image: imageUrl,
+                quantity: 1,
+              })
+            }
             className="max-w-sm active:scale-95 transition-scale duration-200 ease-in-out rounded-xl overflow-hidden bg-black shadow-md shadow-black mx-2 mb-4 border-2 border-black"
           >
             <img

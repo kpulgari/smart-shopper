@@ -38,7 +38,6 @@ asparagus,2.79
 green beans,1.99
 corn,0.99
 peas,1.49
-spinach,2.09
 sweet potato,1.69
 cabbage,1.29
 pumpkin,3.49

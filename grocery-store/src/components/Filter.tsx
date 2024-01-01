@@ -159,16 +159,16 @@ export const Filter = () => {
   ];
 
   return (
-    <div className="bg-black rounded-2xl shadow-2xl shadow-black ml-4 mb-4 overflow-x-hidden">
+    <div className="bg-black rounded-2xl shadow-2xl shadow-black ml-8 mb-4 overflow-x-hidden">
       <div className="flex flex-col gap-4 m-4">
-        <div className="text-white flex justify-center items-center w-full h-fit font-bold text-xl">
+        <div className="text-white flex justify-center items-center w-full h-fit font-bold lg:text-xl text-base ">
           Filters
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-4 mb-4 overflow-hidden px-2 justify-center ">
+        <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 lg:gap-4 gap-3 mb-4 overflow-hidden px-2 justify-center ">
           {buttons.map((button, index) => (
             <div
               key={index}
-              className={`h-12 w-full flex justify-center items-center cursor-pointer rounded-2xl font-bold transition duration-200 ease-in-out ${
+              className={`h-fit w-full lg:text-lg text-sm flex justify-center items-center cursor-pointer rounded-2xl transition duration-200 ease-in-out ${
                 button.state ? "bg-slate-500 text-white " : ""
               } ${
                 button.oppositeState ? "bg-slate-200 text-slate-400  " : ""

@@ -23,10 +23,14 @@ try:
         f"https://api.unsplash.com/search/photos/?client_id={unsplash_api}&query="
     )
 
-    existing_files = client.storage.from_("products").list("")
+    existing_files = client.storage.from_("products").list()
+    existing_items = set()
+
+    for item in existing_files:
+        existing_items.add(item["name"])
 
     for name in names:
-        if f"{name}.jpg" not in existing_files:
+        if f"{name}.jpg" not in existing_items:
             try:
                 url = unsplash_link + name
                 r = requests.get(url)
@@ -46,6 +50,8 @@ try:
 
             except Exception as e:
                 print(f"Item skipped: {name} - Error: {e}")
+        else:
+            print(f"{name} already in bucket.")
 
 except Exception as e:
     print(f"Error occurred: {e}")
