@@ -46,7 +46,7 @@ export const Cart = () => {
       <img className="lg:w-8 lg:h-8 w-4 h-4 object-cover" src={"/cart.png"} />
     </div>
   ) : (
-    <div className="transition-all duration-200 ease-in-out bg-black rounded-2xl shadow-2xl shadow-black ml-8 lg:h-[50vh] h-[45vh] overflow-x-hidden">
+    <div className="transition-all duration-200 ease-in-out bg-black rounded-2xl shadow-2xl shadow-black ml-8 lg:h-[50vh] h-[45vh] overflow-y-hidden overflow-x-hidden">
       <div className="flex flex-col gap-4 m-4">
         <div className="flex items-center overflow-x-auto">
           <button
@@ -59,37 +59,39 @@ export const Cart = () => {
             Cart
           </span>
         </div>
-        {cartData.length === 0 ? (
-          <div className="flex lg:h-60 h-48 justify-center items-center">
-            <span className="text-black text-center rounded-xl text-sm lg:text-lg bg-white p-4 font-bold">
-              Cart is empty. Add items by clicking on them.
-            </span>
-          </div>
-        ) : (
-          <div className="cart-scroll flex flex-col gap-y-4 mb-2 p-2 justify-center rounded-xl overflow-y-auto overflow-x-auto">
-            {cartData.map((cartItem, index) => (
-              <div
-                key={index}
-                className="w-full grid grid-cols-4 gap-2 text-sm lg:text-base bg-white p-2 rounded-xl items-center"
-              >
-                <span className="col-span-1 font-bold">{cartItem.name}</span>
-                <span className="col-span-1 flex justify-center">
-                  ({cartItem.quantity})
-                </span>
-                <span className="col-span-1 flex justify-center">
-                  ${cartItem.totalPrice}
-                </span>
-                <div className="col-span-1 flex justify-end">
-                  <img
-                    className="w-12 h-12 object-cover rounded-xl"
-                    src={cartItem.image}
-                    alt={`Image ${index}`}
-                  />
+        <div className="overflow-y-scroll lg:h-[38vh] h-[35vh]">
+          {cartData.length === 0 ? (
+            <div className="flex lg:h-60 h-48 justify-center items-center">
+              <span className="text-black text-center rounded-xl text-sm lg:text-lg bg-white p-4 font-bold">
+                Cart is empty. Add items by clicking on them.
+              </span>
+            </div>
+          ) : (
+            <div className="cart-scroll flex flex-col gap-y-4 mb-2 p-2 justify-center rounded-xl overflow-y-auto overflow-x-auto">
+              {cartData.map((cartItem, index) => (
+                <div
+                  key={index}
+                  className="w-full grid grid-cols-4 gap-2 text-sm lg:text-base bg-white p-2 rounded-xl items-center"
+                >
+                  <span className="col-span-1 font-bold">{cartItem.name}</span>
+                  <span className="col-span-1 flex justify-center">
+                    ({cartItem.quantity})
+                  </span>
+                  <span className="col-span-1 flex justify-center">
+                    ${cartItem.totalPrice}
+                  </span>
+                  <div className="col-span-1 flex justify-end">
+                    <img
+                      className="w-12 h-12 object-cover rounded-xl"
+                      src={cartItem.image}
+                      alt={`Image ${index}`}
+                    />
+                  </div>
                 </div>
-              </div>
-            ))}
-          </div>
-        )}
+              ))}
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
