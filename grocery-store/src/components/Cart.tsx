@@ -50,10 +50,10 @@ export const Cart = () => {
       <div className="flex flex-col gap-4 m-4">
         <div className="flex items-center overflow-x-auto">
           <button
-            className="bg-white h-6 w-6 rounded-md text-center font-bold hover:bg-slate-200 "
+            className="bg-white h-6 w-6 rounded-md text-center font-bold items-center justify-center flex hover:bg-slate-200 "
             onClick={() => handleCartClick()}
           >
-            X
+            <img src="/minimize.png" className="h-4 w-4"></img>
           </button>
           <span className="text-white font-bold lg:text-xl text-base flex-grow mr-4 text-center">
             Cart
