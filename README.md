@@ -2,7 +2,7 @@
 
 SmartShopper is a grocery store application designed to simplify your shopping experience. With a user-friendly interface and easy-to-use features, it aims to enhance the way you shop for groceries online. App comprises a collection of 140+ products integrated with images fetched through the Unsplash API.
 
-![Screenshot 1](https://github.com/kpulgari/smart-shopper/assets/90290549/4f027e19-9531-4cbb-ba60-cbf27a965508)
+<img width="1430" alt="Screenshot 2024-01-03 at 11 40 42 AM" src="https://github.com/kpulgari/smart-shopper/assets/90290549/7159a040-e9be-4769-bf42-ae99d7a79865">
 
 ## Features
 
