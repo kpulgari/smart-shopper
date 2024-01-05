@@ -32,6 +32,7 @@ interface SearchContextType {
   checkImagesLoading: () => boolean;
   setCartDataFunction: (item: CartItem) => void;
   getCartData: () => CartItem[];
+  removeCartItem: (item: CartItem) => void;
 }
 
 export const SearchContext = createContext<SearchContextType | undefined>(
@@ -70,6 +71,26 @@ export const SearchProvider: React.FC<SearchContextProps> = ({ children }) => {
         },
       ]);
     }
+  };
+
+  const removeCartItem = (item: CartItem) => {
+    const existingItemIndex = cartData.findIndex(
+      (element) => element.name === item.name
+    );
+    const updatedCartData = [...cartData];
+    updatedCartData[existingItemIndex].quantity -= 1;
+    updatedCartData[existingItemIndex].totalPrice = parseFloat(
+      (
+        updatedCartData[existingItemIndex].totalPrice -
+        item.totalPrice / item.quantity
+      ).toFixed(2)
+    );
+
+    if (updatedCartData[existingItemIndex].quantity === 0) {
+      updatedCartData.splice(existingItemIndex, 1);
+    }
+
+    setCartData(updatedCartData);
   };
 
   const getCartData = () => {
@@ -172,6 +193,7 @@ export const SearchProvider: React.FC<SearchContextProps> = ({ children }) => {
     checkImagesLoading,
     setCartDataFunction,
     getCartData,
+    removeCartItem,
   };
 
   return (

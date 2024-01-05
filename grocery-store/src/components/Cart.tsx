@@ -13,7 +13,7 @@ export const Cart = () => {
   const [cartData, setCartData] = useState<CartItem[]>([]);
   const [cartOpen, setCartOpen] = useState(false);
   const [itemAdded, setItemAdded] = useState(false);
-  const { getCartData } = useSearchContext();
+  const { getCartData, removeCartItem } = useSearchContext();
 
   useEffect(() => {
     setCartData(getCartData());
@@ -29,6 +29,10 @@ export const Cart = () => {
 
   const handleCartClick = () => {
     setCartOpen(!cartOpen);
+  };
+
+  const handleItemClick = (item: CartItem) => {
+    removeCartItem(item);
   };
 
   return !cartOpen ? (
@@ -72,6 +76,14 @@ export const Cart = () => {
                 <div
                   key={index}
                   className="w-full grid grid-cols-4 gap-2 text-sm lg:text-base bg-white p-2 rounded-xl items-center"
+                  onClick={() =>
+                    handleItemClick({
+                      name: cartItem.name,
+                      quantity: cartItem.quantity,
+                      totalPrice: cartItem.totalPrice,
+                      image: cartItem.image,
+                    })
+                  }
                 >
                   <span className="col-span-1 font-bold">{cartItem.name}</span>
                   <span className="col-span-1 flex justify-center">
