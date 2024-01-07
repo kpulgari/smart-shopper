@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { supabase } from "../services/supabase";
 import { useSearchContext } from "../contexts/SearchContext";
+import axios from "axios";
 
 interface SearchResult {
   name: string;
@@ -15,12 +16,29 @@ export const SearchBar = () => {
   const [initialSearchResult, setInitialSearchResult] = useState<
     SearchResult[]
   >([]);
+  const [smartSearchActive, setSmartSearchActive] = useState(false);
   const {
     setSearchResults,
     resetFilter,
     setIsSearchingFunction,
     setImageDataFunction,
   } = useSearchContext();
+
+  useEffect(() => {
+    const checkServerStatus = async () => {
+      try {
+        const active = await axios.get("http://127.0.0.1:5000/");
+        if (active.status !== 200) {
+          setSmartSearchActive(false);
+        }
+      } catch (error) {
+        console.error("Error checking server status:", error);
+        setSmartSearchActive(false);
+      }
+    };
+
+    checkServerStatus();
+  }, []);
 
   const initialSearch = async () => {
     try {
@@ -70,17 +88,15 @@ export const SearchBar = () => {
   }, [initialSearchResult.length]);
 
   useEffect(() => {
-    if (typingTimeout) {
-      clearTimeout(typingTimeout);
-    }
-
     if (searchText !== "") {
+      setSmartSearchActive(true);
       setIsSearchingFunction(true);
       performSearch();
     } else if (initialSearchResult.length === 0) {
       initialSearch();
     } else {
       setIsSearchingFunction(true);
+      setSmartSearchActive(false);
       setSearchResults(initialSearchResult);
       resetFilter(initialSearchResult);
     }
@@ -118,6 +134,59 @@ export const SearchBar = () => {
     }
   };
 
+  const performSearchSpecific = async (item: string) => {
+    try {
+      if (item === "water" || item === "") {
+        return [];
+      }
+      const { data, error } = await supabase
+        .from("Product")
+        .select("*")
+        .ilike("name", `${item}%`);
+
+      if (error) {
+        throw error;
+      }
+
+      return data || [];
+    } catch (error) {
+      console.error("Error searching!");
+      return [];
+    }
+  };
+
+  const handleSmartSearch = async () => {
+    setIsSearchingFunction(true);
+    setSmartSearchActive(false);
+    try {
+      const response = await axios.get(
+        `http://127.0.0.1:5000/query/${searchText}`
+      );
+      const searchData = response.data;
+      console.log(searchData);
+
+      let combinedSearchResults: SearchResult[] = [];
+
+      for (const item of searchData) {
+        const searchResults = await performSearchSpecific(item);
+        combinedSearchResults = combinedSearchResults.concat(searchResults);
+      }
+
+      setSearchResults(combinedSearchResults);
+      resetFilter(combinedSearchResults);
+
+      const timeout = setTimeout(() => {
+        setIsSearchingFunction(false);
+        setSmartSearchActive(true);
+      }, 1000);
+
+      setTypingTimeout(timeout);
+    } catch (error) {
+      console.error("Error handling smart search!");
+      setIsSearchingFunction(false);
+      setSmartSearchActive(true);
+    }
+  };
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchText(event.target.value);
   };
@@ -132,8 +201,13 @@ export const SearchBar = () => {
         onChange={handleInputChange}
       />
       <button
-        className="rounded-3xl font-bold font-s px-4 h-full bg-gradient-to-r from-cyan-500 to-indigo-500"
-        onClick={() => setSearchResults([])}
+        className={`rounded-3xl font-bold font-s px-4 h-full ${
+          smartSearchActive
+            ? "bg-gradient-to-r from-cyan-500 to-indigo-500 hover:scale-110 transition-scale duration-200 ease-in-out"
+            : "bg-slate-500"
+        }`}
+        onClick={() => handleSmartSearch()}
+        disabled={!smartSearchActive}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"

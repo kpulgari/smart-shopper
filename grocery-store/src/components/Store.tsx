@@ -73,7 +73,8 @@ export const Store = () => {
     return (
       <div className="flex justify-center items-center mr-4 text-center h-[80vh]">
         <p className="text-xl font-bold bg-black text-white p-6 rounded-2xl shadow-2xl shadow-black">
-          No results found! Search for items using search bar above.
+          No results found! Search for items using search bar above, or try
+          using SmartSearch!
         </p>
       </div>
     );
