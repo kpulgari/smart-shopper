@@ -17,7 +17,7 @@ SmartShopper is a grocery store application designed to simplify your shopping e
 ## How SmartSearch Works 🧙🏼‍♂️
 
 ### Simplifying Shopping for Specific Items
-SmartSearch is your ultimate assistant when you're looking to gather ingredients or products for a specific recipe or category. Let's take the example of baking a cake. Instead of manually searching for each ingredient required, SmartSearch leverages the power of OpenAI's API to streamline the process:
+SmartSearch is your ultimate assistant when you're looking to gather ingredients or products for a specific recipe or category. Let's take the example of baking a cake. Instead of manually searching for each ingredient required, SmartSearch leverages the power of OpenAI's _GPT 3.5 Turbo_ to streamline the process:
 
 https://github.com/kpulgari/smart-shopper/assets/90290549/8f327056-b18b-4207-9e7d-ecd2779beeae
 
@@ -26,7 +26,7 @@ https://github.com/kpulgari/smart-shopper/assets/90290549/8f327056-b18b-4207-9e7
 2. **Backend Request:** Upon clicking the SmartSearch button, the frontend of the application sends a request to the backend Flask server, transmitting the specific item or recipe the user is searching for.
 
 ### Processing on the Flask Server
-3. **OpenAI Query:** The Flask backend server receives the user's query and communicates with the OpenAI API. It utilizes the powerful capabilities of the OpenAI API to query the database for items related to the user's input. For instance, searching for "cake" might retrieve various baking ingredients such as flour, sugar, eggs, etc.
+3. **OpenAI Query:** The Flask backend server receives the user's query and communicates with the OpenAI API. It utilizes the powerful capabilities of GPT 3.5 Turbo to query the database for items related to the user's input. For instance, searching for "cake" might retrieve various baking ingredients such as flour, sugar, eggs, etc.
 
 ### Displaying Results to the User
 4. **Frontend Display:** Once the Flask server obtains the results from the OpenAI API, the frontend of the SmartShopper application displays the queried items to the user. The user can then review the list of ingredients or related products fetched by the SmartSearch functionality.
@@ -34,9 +34,9 @@ https://github.com/kpulgari/smart-shopper/assets/90290549/8f327056-b18b-4207-9e7
 ### Streamlining Shopping Experience
 By using SmartSearch, users can significantly expedite their shopping process, especially when searching for multiple items related to a specific recipe or category. It simplifies the task of finding all necessary ingredients or products by providing a consolidated list of relevant items directly within the application.
 
-## Setup Instructions 🔧
+## Setup Instructions 🛠️
 
-To set up SmartShopper, follow these steps:
+To set up **SmartShopper**, follow these steps:
 
 1. **Set up Supabase Database:**
    - Create a Supabase database named "Product" with columns "name" and "price".
@@ -55,7 +55,7 @@ To set up SmartShopper, follow these steps:
    - Install dependencies using `npm install` or `yarn install`.
    - Start the application using `npm run start` or `yarn start`.
   
-To set up SmartSearch, follow these steps:
+To set up **SmartSearch**, follow these steps:
 
 1. **Add OpenAI API Key:**
    - Navigate to the `config` folder and create a variable called "OPENAI_API_KEY" in your `.env` file, and populate it with your OpenAI API key.
