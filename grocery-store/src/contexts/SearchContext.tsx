@@ -33,6 +33,8 @@ interface SearchContextType {
   setCartDataFunction: (item: CartItem) => void;
   getCartData: () => CartItem[];
   removeCartItem: (item: CartItem) => void;
+  checkIsSmartSearching: () => boolean;
+  setIsSmartSearchingFunction: (searching: boolean) => void;
 }
 
 export const SearchContext = createContext<SearchContextType | undefined>(
@@ -43,8 +45,17 @@ export const SearchProvider: React.FC<SearchContextProps> = ({ children }) => {
   const [originalResults, setOriginalResults] = useState<SearchResult[]>([]);
   const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
   const [isSearching, setIsSearching] = useState(false);
+  const [isSmartSearching, setIsSmartSearching] = useState(false);
   const [imageData, setImageData] = useState<Record<string, string>>({});
   const [cartData, setCartData] = useState<CartItem[]>([]);
+
+  const setIsSmartSearchingFunction = (searching: boolean) => {
+    setIsSmartSearching(searching);
+  };
+
+  const checkIsSmartSearching = () => {
+    return isSmartSearching;
+  };
 
   const setCartDataFunction = (item: CartItem) => {
     const existingItemIndex = cartData.findIndex(
@@ -194,6 +205,8 @@ export const SearchProvider: React.FC<SearchContextProps> = ({ children }) => {
     setCartDataFunction,
     getCartData,
     removeCartItem,
+    setIsSmartSearchingFunction,
+    checkIsSmartSearching,
   };
 
   return (

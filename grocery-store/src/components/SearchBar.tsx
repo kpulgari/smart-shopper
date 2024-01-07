@@ -22,6 +22,7 @@ export const SearchBar = () => {
     resetFilter,
     setIsSearchingFunction,
     setImageDataFunction,
+    setIsSmartSearchingFunction,
   } = useSearchContext();
 
   useEffect(() => {
@@ -156,7 +157,7 @@ export const SearchBar = () => {
   };
 
   const handleSmartSearch = async () => {
-    setIsSearchingFunction(true);
+    setIsSmartSearchingFunction(true);
     setSmartSearchActive(false);
     try {
       const response = await axios.get(
@@ -176,14 +177,14 @@ export const SearchBar = () => {
       resetFilter(combinedSearchResults);
 
       const timeout = setTimeout(() => {
-        setIsSearchingFunction(false);
+        setIsSmartSearchingFunction(false);
         setSmartSearchActive(true);
       }, 1000);
 
       setTypingTimeout(timeout);
     } catch (error) {
       console.error("Error handling smart search!");
-      setIsSearchingFunction(false);
+      setIsSmartSearchingFunction(false);
       setSmartSearchActive(true);
     }
   };
