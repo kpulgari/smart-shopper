@@ -1,0 +1,19 @@
+.custom-cursor {
+  position: fixed;
+  width: 80px;
+  height: 80px;
+  background-color: black;
+  border-radius: 50%;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+  user-select: none;
+}
+
+.cursor-text {
+  font-size: 50px;
+}
+
+body.no-pointer {
+  cursor: none;
+}
