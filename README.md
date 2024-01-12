@@ -19,7 +19,7 @@ SmartShopper is a grocery store application designed to simplify your shopping e
 ### Simplifying Shopping for Specific Items
 SmartSearch is your ultimate assistant when you're looking to gather ingredients or products for a specific recipe or category. Let's take the example of baking a cake. Instead of manually searching for each ingredient required, SmartSearch leverages the power of OpenAI's _GPT 3.5 Turbo_ to streamline the process:
 
-https://github.com/kpulgari/smart-shopper/assets/90290549/70d5296b-543e-4076-a2db-b9402413e5dd
+https://github.com/kpulgari/smart-shopper/assets/90290549/64e87127-fa74-4fb3-b607-2090487e2700
 
 ### Utilizing OpenAI's API
 1. **User Request:** When a user wants to fetch all the items related to a specific recipe or category, they trigger SmartSearch by entering their query into the application.
@@ -52,8 +52,8 @@ To set up **SmartShopper**, follow these steps:
    - Install all dependencies with pip, and run the `download_pictures.py` file to populate the bucket with images. _Caution: Unsplash free tier API only allows 50 image calls per hour, so run the file over multiple hours to fully download all images_
 
 4. **Install Dependencies and Start Application:**
-   - Install dependencies using `npm install` or `yarn install`.
-   - Start the application using `npm run start` or `yarn start`.
+   - Install dependencies using `npm install`.
+   - Start the application using `npm run dev`.
   
 To set up **SmartSearch**, follow these steps:
 
