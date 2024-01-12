@@ -17,6 +17,7 @@ export const SearchBar = () => {
     SearchResult[]
   >([]);
   const [smartSearchActive, setSmartSearchActive] = useState(false);
+  const [serverActive, setServerActive] = useState(false);
   const {
     setSearchResults,
     resetFilter,
@@ -30,11 +31,13 @@ export const SearchBar = () => {
       try {
         const active = await axios.get("http://127.0.0.1:5000/");
         if (active.status !== 200) {
-          setSmartSearchActive(false);
+          setServerActive(false);
+        } else {
+          setServerActive(true);
         }
       } catch (error) {
         console.error("Error checking server status:", error);
-        setSmartSearchActive(false);
+        setServerActive(false);
       }
     };
 
@@ -90,7 +93,9 @@ export const SearchBar = () => {
 
   useEffect(() => {
     if (searchText !== "") {
-      setSmartSearchActive(true);
+      if (serverActive) {
+        setSmartSearchActive(true);
+      }
       setIsSearchingFunction(true);
       performSearch();
     } else if (initialSearchResult.length === 0) {

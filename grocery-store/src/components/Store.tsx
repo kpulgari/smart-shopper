@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useSearchContext } from "../contexts/SearchContext";
 import "../styles/Store.css";
+import { CustomCursor } from "./CustomCursor";
 
 interface SearchResult {
   name: string;
@@ -20,6 +21,8 @@ export const Store = () => {
   const [imagesLoading, setImagesLoading] = useState(false);
   const [isSearching, setIsSearching] = useState(false);
   const [isSmartSearching, setIsSmartSearching] = useState(false);
+  const [isHoveringOverCartItem, setIsHoveringOverCartItem] = useState(false);
+  const [isHoveringOverDiv, setIsHoverOverDiv] = useState(false);
   const {
     searchResults,
     checkIsSearching,
@@ -186,7 +189,15 @@ export const Store = () => {
   }
 
   return (
-    <div className="flex flex-wrap overflow-y-auto justify-center">
+    <div
+      className="flex flex-wrap overflow-y-auto justify-center"
+      onMouseEnter={() => {
+        setIsHoverOverDiv(true);
+      }}
+      onMouseLeave={() => {
+        setIsHoverOverDiv(false);
+      }}
+    >
       {imageUrls.map((imageUrl, index) => {
         const productName = itemsArray[index]?.name;
         const truncatedName =
@@ -205,6 +216,12 @@ export const Store = () => {
                 quantity: 1,
               })
             }
+            onMouseEnter={() => {
+              setIsHoveringOverCartItem(true);
+            }}
+            onMouseLeave={() => {
+              setIsHoveringOverCartItem(false);
+            }}
             className="max-w-sm active:scale-95 transition-scale duration-200 ease-in-out rounded-xl overflow-hidden bg-black shadow-md shadow-black mx-2 mb-4 border-2 border-black"
           >
             <img
@@ -221,6 +238,11 @@ export const Store = () => {
           </div>
         );
       })}
+      <CustomCursor
+        isHovering={isHoveringOverCartItem}
+        isHoveringCartItem={false}
+        isHoveringDiv={isHoveringOverDiv}
+      ></CustomCursor>
     </div>
   );
 };

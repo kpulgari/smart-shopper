@@ -52,7 +52,7 @@ export const CustomCursor: React.FC<CustomCursorProps> = ({
       className={`custom-cursor flex justify-center items-center`}
       style={{ left: cursorPosition.x, top: cursorPosition.y }}
     >
-      {isHovering && isHoveringDiv ? (
+      {isHovering ? (
         <span className="text-white font-thin cursor-text mb-2">+</span>
       ) : (
         ""
