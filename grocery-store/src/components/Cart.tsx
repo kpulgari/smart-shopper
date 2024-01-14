@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSearchContext } from "../contexts/SearchContext";
 import "../styles/Cart.css";
+import CustomCursor from "./CustomCursor";
 
 interface CartItem {
   name: string;
@@ -13,6 +14,7 @@ export const Cart = () => {
   const [cartData, setCartData] = useState<CartItem[]>([]);
   const [cartOpen, setCartOpen] = useState(false);
   const [itemAdded, setItemAdded] = useState(false);
+  const [isHoveringOverCartItem, setIsHoveringOverCartItem] = useState(false);
   const { getCartData, removeCartItem } = useSearchContext();
 
   useEffect(() => {
@@ -63,7 +65,7 @@ export const Cart = () => {
             Cart
           </span>
         </div>
-        <div className="overflow-y-scroll lg:h-[38vh] h-[35vh]">
+        <div className="overflow-y-scroll lg:h-[38vh] h-fit">
           {cartData.length === 0 ? (
             <div className="flex lg:h-60 h-48 justify-center items-center">
               <span className="text-black text-center rounded-xl text-sm lg:text-lg bg-white p-4 font-bold">
@@ -84,6 +86,12 @@ export const Cart = () => {
                       image: cartItem.image,
                     })
                   }
+                  onMouseEnter={() => {
+                    setIsHoveringOverCartItem(true);
+                  }}
+                  onMouseLeave={() => {
+                    setIsHoveringOverCartItem(false);
+                  }}
                 >
                   <span className="col-span-1 font-bold">{cartItem.name}</span>
                   <span className="col-span-1 flex justify-center">
@@ -101,6 +109,11 @@ export const Cart = () => {
                   </div>
                 </div>
               ))}
+              <CustomCursor
+                isHovering={false}
+                isHoveringCartItem={isHoveringOverCartItem}
+                isHoveringDiv={false}
+              ></CustomCursor>
             </div>
           )}
         </div>

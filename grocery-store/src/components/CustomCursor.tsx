@@ -16,11 +16,13 @@ export const CustomCursor: React.FC<CustomCursorProps> = ({
   const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
   const cursorRef = useRef<HTMLDivElement>(null);
   const scale = isHoveringCartItem ? 0.5 : 1;
-  const reset = !isHoveringDiv ? 0 : 0.2;
+  const reset = isHoveringDiv ? 0.2 : 0;
 
   useEffect(() => {
     const updateCursorPosition = (e: MouseEvent) => {
-      setCursorPosition({ x: e.clientX, y: e.clientY });
+      setTimeout(() => {
+        setCursorPosition({ x: e.clientX, y: e.clientY });
+      }, 50);
     };
 
     window.addEventListener("mousemove", updateCursorPosition);
@@ -35,8 +37,6 @@ export const CustomCursor: React.FC<CustomCursorProps> = ({
       scale: isHoveringDiv ? 0.2 : 0,
       duration: 0.3,
     });
-
-    document.body.classList.toggle("no-pointer", isHoveringDiv);
   }, [isHoveringDiv, scale]);
 
   useEffect(() => {
@@ -46,6 +46,13 @@ export const CustomCursor: React.FC<CustomCursorProps> = ({
     });
   }, [isHovering, scale, reset]);
 
+  useEffect(() => {
+    gsap.to(cursorRef.current, {
+      scale: isHoveringCartItem ? scale : reset,
+      duration: 0.3,
+    });
+  }, [isHoveringCartItem, scale, reset]);
+
   return (
     <div
       ref={cursorRef}
@@ -54,6 +61,11 @@ export const CustomCursor: React.FC<CustomCursorProps> = ({
     >
       {isHovering ? (
         <span className="text-white font-thin cursor-text mb-2">+</span>
+      ) : (
+        ""
+      )}
+      {isHoveringCartItem ? (
+        <span className="text-white font-thin cursor-text mb-2">-</span>
       ) : (
         ""
       )}

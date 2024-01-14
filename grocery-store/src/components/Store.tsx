@@ -21,7 +21,7 @@ export const Store = () => {
   const [imagesLoading, setImagesLoading] = useState(false);
   const [isSearching, setIsSearching] = useState(false);
   const [isSmartSearching, setIsSmartSearching] = useState(false);
-  const [isHoveringOverCartItem, setIsHoveringOverCartItem] = useState(false);
+  const [isHoveringOverStoreItem, setIsHoveringOverStoreItem] = useState(false);
   const [isHoveringOverDiv, setIsHoverOverDiv] = useState(false);
   const {
     searchResults,
@@ -217,10 +217,10 @@ export const Store = () => {
               })
             }
             onMouseEnter={() => {
-              setIsHoveringOverCartItem(true);
+              setIsHoveringOverStoreItem(true);
             }}
             onMouseLeave={() => {
-              setIsHoveringOverCartItem(false);
+              setIsHoveringOverStoreItem(false);
             }}
             className="max-w-sm active:scale-95 transition-scale duration-200 ease-in-out rounded-xl overflow-hidden bg-black shadow-md shadow-black mx-2 mb-4 border-2 border-black"
           >
@@ -239,7 +239,7 @@ export const Store = () => {
         );
       })}
       <CustomCursor
-        isHovering={isHoveringOverCartItem}
+        isHovering={isHoveringOverStoreItem}
         isHoveringCartItem={false}
         isHoveringDiv={isHoveringOverDiv}
       ></CustomCursor>
