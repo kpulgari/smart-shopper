@@ -1,10 +1,10 @@
-# SmartShopper 🪄
+# 🪄 SmartShopper 
 
 SmartShopper is a grocery store application designed to simplify your shopping experience with AI-powered _SmartSearch_. It boasts a user-friendly interface and easy-to-use features and aims to enhance how you shop for groceries online. The app comprises 140+ products integrated with images fetched through the Unsplash API.
 
 <img width="1430" alt="SmartSearch" src="https://github.com/kpulgari/smart-shopper/assets/90290549/7159a040-e9be-4769-bf42-ae99d7a79865">
 
-## Technologies Used ⚛️
+## ⚛️ Technologies Used 
 
 - **React**
 - **Tailwind**
@@ -14,7 +14,7 @@ SmartShopper is a grocery store application designed to simplify your shopping e
 - **Unsplash API**
 - **OpenAI API**
 
-## How SmartSearch Works 🧙🏼‍♂️
+## 🧙🏼‍♂️ How SmartSearch Works 
 
 ### Simplifying Shopping for Specific Items
 SmartSearch is your ultimate assistant when you're looking to gather ingredients or products for a specific recipe or category. Let's take the example of baking a cake. Instead of manually searching for each ingredient required, SmartSearch leverages the power of OpenAI's _GPT 3.5 Turbo_ to streamline the process:
@@ -34,7 +34,7 @@ https://github.com/kpulgari/smart-shopper/assets/90290549/64e87127-fa74-4fb3-b60
 ### Streamlining Shopping Experience
 By using SmartSearch, users can significantly expedite their shopping process, especially when searching for multiple items related to a specific recipe or category. It simplifies the task of finding all necessary ingredients or products by providing a consolidated list of relevant items directly within the application.
 
-## Setup Instructions 🛠️
+## 🛠️ Setup Instructions 
 
 To set up **SmartShopper**, follow these steps:
 
