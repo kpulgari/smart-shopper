@@ -19,7 +19,7 @@ SmartShopper is a grocery store application designed to simplify your shopping e
 ### Simplifying Shopping for Specific Items
 SmartSearch is your ultimate assistant when you're looking to gather ingredients or products for a specific recipe or category. Let's take the example of baking a cake. Instead of manually searching for each ingredient required, SmartSearch leverages the power of OpenAI's _GPT 3.5 Turbo_ to streamline the process:
 
-https://github.com/kpulgari/smart-shopper/assets/90290549/64e87127-fa74-4fb3-b607-2090487e2700
+https://github.com/kpulgari/smart-shopper/assets/90290549/33235ba9-3ce7-4d6f-974b-a667fc0d93df
 
 ### Utilizing OpenAI's API
 1. **User Request:** When a user wants to fetch all the items related to a specific recipe or category, they trigger SmartSearch by entering their query into the application.
