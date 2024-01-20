@@ -169,8 +169,6 @@ export const SearchBar = () => {
         `http://127.0.0.1:5000/query/${searchText}`
       );
       const searchData = response.data;
-      console.log(searchData);
-
       let combinedSearchResults: SearchResult[] = [];
 
       for (const item of searchData) {
@@ -193,6 +191,7 @@ export const SearchBar = () => {
       setSmartSearchActive(true);
     }
   };
+  
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchText(event.target.value);
   };
