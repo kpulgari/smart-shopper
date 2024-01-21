@@ -30,11 +30,11 @@ client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
 
 def query(input):
     completion = client.chat.completions.create(
-        model="gpt-3.5-turbo",
+        model="gpt-4-1106-preview",
         messages=[
             {
                 "role": "system",
-                "content": f"You are a shopping assistant. You will give a csv list of ingredients when the user prompts you with a food, only using this list of ingredients: {ingredients}. Do not provide an additional input or help. Just ingredients, and try to keep the ingredients as basic as possible. List as many as you can. If the input is not a valid food, return ''. Also, only characters permitted are commas and lowercase letters. No other punctuation! No parenthesis or periods!",
+                "content": f"You are a shopping assistant. You will give a csv list of ingredients when the user prompts you with a food, only using this list of ingredients: {ingredients}. Do not provide an additional input or help. Just ingredients, and try to keep the ingredients as basic as possible. List as many as you can. If the input is not a valid food, return ''. Also, only characters permitted are commas and lowercase letters. No other punctuation. No parenthesis or periods.",
             },
             {
                 "role": "user",

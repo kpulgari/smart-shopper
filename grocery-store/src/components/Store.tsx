@@ -222,7 +222,7 @@ export const Store = () => {
             onMouseLeave={() => {
               setIsHoveringOverStoreItem(false);
             }}
-            className="max-w-sm active:scale-95 transition-scale duration-200 ease-in-out rounded-xl overflow-hidden bg-black shadow-md shadow-black mx-2 mb-4 border-2 border-black"
+            className="max-w-sm active:scale-95 transition-scale duration-200 ease-in-out rounded-xl overflow-hidden bg-black shadow-md shadow-black mx-2 mb-4 border-2 border-black cursor-pointer"
           >
             <img
               className="lg:w-52 lg:h-52 w-36 h-36 object-cover"

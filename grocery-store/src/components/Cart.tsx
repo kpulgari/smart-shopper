@@ -77,7 +77,7 @@ export const Cart = () => {
               {cartData.map((cartItem, index) => (
                 <div
                   key={index}
-                  className="w-full grid grid-cols-4 gap-2 text-sm lg:text-base bg-white p-2 rounded-xl items-center"
+                  className="w-full grid grid-cols-4 gap-2 text-sm lg:text-base bg-white p-2 rounded-xl items-center cursor-pointer"
                   onClick={() =>
                     handleItemClick({
                       name: cartItem.name,
